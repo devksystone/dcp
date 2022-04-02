@@ -1,0 +1,70 @@
+@media(min-width:768px){
+    .dcp-section#about-company-360 #anios15{
+        width:80%;
+        margin: auto;
+    }
+}
+/* --------------------------------------- */
+.circle-cats-container{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+.circle-cat{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+.circle-div{
+    border-radius: 50%;
+    background-color: #8cc186;
+    width: 20px;
+    height: 20px;
+   margin-bottom: 10px;
+   
+   
+}
+.circle-cat-title{
+    font-family: 'Lato';
+    font-weight: 600;
+    color: #555;
+}
+
+.circle-cat:hover .circle-div{
+    animation-name:circle-scale;
+   animation-duration: 8s;
+   animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.circle-cat:hover .circle-cat-title{ 
+    animation-name:circle-cat-title-anim;
+    animation-duration: 8s;
+    animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+@keyframes circle-scale{
+   
+    50%{
+        transform: scale(3);
+        
+    }
+    100%{
+        transform: scale(1);
+        
+    }    
+}
+@keyframes circle-cat-title-anim {
+    50%{
+        transform: scale(1.2);
+        margin-top: 30px;
+        color: #ff9041;
+    }
+    100%{
+        transform: scale(1);
+        transform: translateY(60);
+        color: #555;
+    }    
+}
+

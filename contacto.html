@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Diseños en corrugado y publicidad - Home</title>
+    <!--<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />-->
+    <!-- Core CSS site-->
+    <link href="assets/libs/styles.min.css" rel="stylesheet" />
+    <link href="assets/css/custom_styles.css" rel="stylesheet" />
+</head>
+
+<body id="dcp-contact-us" class="dcp-main-site">
+    <!-- Navbar component-->
+    <main-header></main-header>
+    <div class="main-content-wrapper">
+        <!-- About section-->
+        <section id="contact-us" class="dcp-section">
+            <div class="container">
+                <div class="row flex-row align-items-center justify-content-center">
+                    <div class="col-lg-12 col-md-12 col-xs-12 text-center my-5">
+                        <h2><span class="orange-txt">Cuéntanos que tienes en mente</span></h2>
+                        <p>y un asesor se pondra en contacto contigo o escribenos a <a href="mailto:contacto@dcp.mx">contacto@dcp.mx</a></p>
+                    </div>
+                </div>
+                <div class="row flex-row align-items-normal justify-content-center contact-wrapper-col" id="contact-wrapper">
+                    <div class="col-lg-6 col-md-6 col-xs-12 text-center my-5">
+                        <form action="">
+
+                            <div class="mb-3 form-item">
+                                <label for="customer-name" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="customer-name" aria-describedby="customer-name">
+                            </div>
+
+                            <div class="mb-3 form-item">
+                                <label for="customer-business" class="form-label">Empresa</label>
+                                <input type="text" class="form-control" id="customer-business" aria-describedby="customer-business">
+                            </div>
+
+                            <div class="mb-3 form-item">
+                                <label for="customer-phone" class="form-label">Teléfono</label>
+                                <input type="phone" class="form-control" id="customer-phone" aria-describedby="customer-phone">
+                            </div>
+
+
+                            <div class="mb-3 form-item">
+                                <label for="customer-email" class="form-label">Correo electrónico</label>
+                                <input type="email" class="form-control" id="customer-email" aria-describedby="customer-email">
+                            </div>
+
+                            <div class="mb-3 form-item">
+                              <label for="customer-comments" class="form-label">Especificaciones</label>
+                              <textarea class="form-control" id="customer-comments" rows="8"></textarea>
+                            </div>
+
+                            <div class="my-5">
+                              <input class="form-control" type="file" id="formFile">
+                            </div>
+
+                            <div class="col-auto my-5">
+                                <button  class="btn-dcp btn btn-rounded btn-orange btn-sm mb-3 float-right" onclick="contacto()">Enviar</button>
+                              </div>
+
+                        </form>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-xs-12 text-center my-5">
+                        <div class="ifrma-map-wrapper">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30076.790423061026!2d-99.28458512286137!3d19.558830606001223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d21c889ff2a0bb%3A0x37ce06b47368d858!2sMexico%20Nuevo%2C%2052966%20Cd%20L%C3%B3pez%20Mateos%2C%20M%C3%A9x.!5e0!3m2!1ses-419!2smx!4v1644254716092!5m2!1ses-419!2smx" width="100%" height="100%" allowfullscreen="" loading="lazy" style="border:0;width:100%; min-height:400px; height:auto;"></iframe>
+                        </div>
+                        <address class="my-5">
+                            52966, México, Cd. López Mateos
+                        </address>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- Footer component-->
+    <main-footer></main-footer>
+    <!-- Libs core JS-->
+    <script src="assets/libs/bootstrap.min.js"></script>
+    <script src="assets/libs/jquery.min.js"></script>
+    <!-- Core site JS-->
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/dcp-scripts.js" async></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function contacto(){
+               
+               let email = document.getElementById('customer-email').value;
+               let name = document.getElementById('customer-name').value;
+               let company = document.getElementById('customer-business').value;
+               let phone = document.getElementById('customer-phone').value;
+               let comments = document.getElementById('customer-comments').value;
+               let uploaded_file = document.getElementById('uploaded_file').value;
+
+               var parametros = {
+                   "name" : name,
+                   "email" : email,
+                   "message": comments,
+                   "company":company,
+                   "pone": phone,
+                   "uploaded_file": uploaded_file
+               };
+               $.ajax({
+                       data:  parametros, 
+                       url:   'sendMail.php', 
+                       type:  'post',
+                       
+                       success:  function (response) { 
+                           Swal.fire({
+                           title: '¡Mensaje enviado!',
+                           text: 'Su mensaje ha sido enviado correctamente, en breve un asesor se pondrá en contacto con usted',
+                           icon: 'success',
+                           confirmButtonText: 'OK'
+                           });
+                       },
+                       error:function(jqXHR, status, error){
+                          
+                           Swal.fire({
+                           title: '¡Error!',
+                           text: 'Su mensaje no ha sido enviado. Intenta contactarnos directamente por teléfono o correo electrónico',
+                           icon: 'error',
+                           confirmButtonText: 'OK'
+                           });
+                       }
+               });
+           }
+    </script>
+</body>
+
+</html>
